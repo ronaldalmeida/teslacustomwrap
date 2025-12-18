@@ -629,18 +629,26 @@ h1.hero {
   }
 
   .floating-cta {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    margin-top: 0.5rem;
+    pointer-events: auto;
   }
 
   .download-pill {
-    width: 100%;
+    width: 90%;
     justify-content: center;
     padding: 1rem;
+    opacity: 1 !important;
+    /* Ensure visibility on mobile */
+    visibility: visible !important;
   }
 
   .vehicle-strip {
@@ -649,10 +657,27 @@ h1.hero {
 
   header {
     text-align: center;
+    margin-bottom: 0.5rem;
   }
 
   .credit-badge {
     justify-content: center;
     display: flex;
+    margin-bottom: 2rem;
+  }
+
+  .pill-btn {
+    padding: 12px 8px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .icon-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
