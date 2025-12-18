@@ -630,7 +630,13 @@ h1.hero {
 
 
   .vehicle-strip {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .collapsible-content {
+    max-height: none;
+    /* Allow full expansion on mobile */
   }
 
   header {
