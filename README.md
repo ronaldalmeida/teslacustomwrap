@@ -1,76 +1,65 @@
-# React + TypeScript + Vite
+# Tesla Custom Wrap Designer
+
+Create and visualize custom wraps for your Tesla vehicle. This tool helps you design patterns and see how they look on official Tesla vehicle templates.
 
 ## Credits
-This project is based on the [Tesla Custom Wraps](https://github.com/teslamotors/custom-wraps) repository. We thank Tesla for providing the official templates and documentation for custom vehicle visualizations.
+This project is based on the official [Tesla Custom Wraps](https://github.com/teslamotors/custom-wraps) repository. We thank Tesla for providing the official 3D vehicle visualization templates.
 
 ---
 
-Currently, two official plugins are available:
+## Local Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## React Compiler
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. **Open the designer**:
+   Navigate to [http://localhost:5173](http://localhost:5173).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Deployment (Cloudflare Pages)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Automatic Deployment (GitHub)
+1.  Connect your GitHub repository to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+2.  Use the following **Build Settings**:
+    - **Framework Preset**: `Vite`
+    - **Build Command**: `npm run build`
+    - **Build Output Directory**: `dist`
+3.  Pushes to `main` will automatically deploy to your production URL.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Manual CLI Deployment
+If you prefer to deploy from your terminal:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Build the project**:
+    ```bash
+    npm run build
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Deploy for the first time**:
+    ```bash
+    npx wrangler pages deploy dist --project-name=teslacustomwrap
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3.  **Deploy updates**:
+    ```bash
+    npx wrangler pages deploy dist
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Custom Domain
+
+This project is intended to be hosted at **[teslacustomwrap.com](https://teslacustomwrap.com)**.
+
+### How to connect:
+1.  In the Cloudflare Dashboard, go to your Pages project.
+2.  Click the **Custom domains** tab at the top.
+3.  Click **Set up a custom domain**.
+4.  Enter `teslacustomwrap.com` and follow the prompts to activate it.
