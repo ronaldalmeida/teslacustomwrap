@@ -22,6 +22,7 @@ function App() {
   const [showOutlines, setShowOutlines] = useState(false);
   const [isImmersive, setIsImmersive] = useState(false);
   const [isVehicleCollapsed, setIsVehicleCollapsed] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const [transform, setTransform] = useState<TransformState>({
     scale: 1,
@@ -240,10 +241,22 @@ function App() {
   const downloadWrap = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const link = document.createElement('a');
-    link.download = `tesla_wrap_${selectedVehicle?.id || 'design'}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+
+    // Tesla requirements: PNG format, < 1MB
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+
+      if (blob.size > 1024 * 1024) {
+        alert("Warning: This design exceeds Tesla's 1MB limit for wrap images. Try reducing the pattern complexity or scale.");
+      }
+
+      const link = document.createElement('a');
+      // Shorten name to stay under 30 chars: model_id.png
+      const fileName = `${selectedVehicle?.id || 'custom_wrap'}.png`;
+      link.download = fileName;
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }, 'image/png');
   };
 
   return (
@@ -371,6 +384,7 @@ function App() {
 
       <main className={`main-designer ${isImmersive ? 'immersive' : ''}`}>
         <div className="hud-top-right">
+          <button className="hud-btn help-btn" title="How to use" onClick={() => setShowHelp(true)}>?</button>
           <button className={`hud-btn ${isImmersive ? 'active' : ''}`} title="Immersion" onClick={() => setIsImmersive(!isImmersive)}>⚡️</button>
           <button className={`hud-btn ${showOutlines ? 'active' : ''}`} title="Outlines" onClick={() => setShowOutlines(!showOutlines)}>👁</button>
           <button className="hud-btn" title="Reset Project" onClick={() => {
@@ -412,6 +426,51 @@ function App() {
           Download Design
         </button>
       </div>
+
+      {showHelp && (
+        <div className="modal-overlay" onClick={() => setShowHelp(false)}>
+          <div className="help-modal" onClick={e => e.stopPropagation()}>
+            <button className="close-modal" onClick={() => setShowHelp(false)}>×</button>
+            <div className="modal-content">
+              <h2>How to Use Custom Wraps</h2>
+
+              <section>
+                <h3>1. Create Your Design</h3>
+                <ul>
+                  <li><strong>Download Template:</strong> Choose your Tesla model and download the 3D template.</li>
+                  <li><strong>Apply Image:</strong> Upload your pattern or high-res image (PNG) in this designer.</li>
+                  <li><strong>Adjust:</strong> Scale, rotate, and nudge your design until it fits perfectly.</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>2. Technical Requirements</h3>
+                <ul>
+                  <li><strong>Resolution:</strong> 512x512 to 1024x1024 pixels for best results.</li>
+                  <li><strong>Size:</strong> Maximum 1 MB per image file.</li>
+                  <li><strong>Format:</strong> Must be a <strong>PNG</strong> file.</li>
+                  <li><strong>Name:</strong> Alphanumeric characters and spaces only (max 30 symbols).</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>3. Preparation (USB Drive)</h3>
+                <ul>
+                  <li><strong>Format:</strong> exFAT, FAT32, ext3, or ext4.</li>
+                  <li><strong>Structure:</strong> Create a folder named <code>Wraps</code> at the root level.</li>
+                  <li><strong>Upload:</strong> Place your exported design PNG files inside the <code>Wraps</code> folder.</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>4. Apply to Vehicle</h3>
+                <p>Plug the USB drive into your Tesla and go to:</p>
+                <div className="help-path">Toybox → Paint Shop → Wraps Tab</div>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

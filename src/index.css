@@ -656,3 +656,121 @@ h1.hero {
     align-items: center;
   }
 }
+/* Help Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 1.5rem;
+}
+
+.help-modal {
+  background: rgba(20, 20, 25, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+  animation: modalEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-content {
+  padding: 2.5rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.close-modal:hover {
+  background: rgba(232, 33, 39, 0.2);
+  color: var(--accent-red);
+}
+
+.modal-content h2 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-content section {
+  margin-bottom: 2rem;
+}
+
+.modal-content h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-red);
+  margin-bottom: 1rem;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-content li {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.modal-content li strong {
+  color: var(--text-main);
+}
+
+.help-path {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+}
+
+.help-btn {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+@media (max-width: 868px) {
+  .modal-content {
+    padding: 1.5rem;
+  }
+}
