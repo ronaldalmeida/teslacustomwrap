@@ -1,6 +1,9 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Credits
+This project is based on the [Tesla Custom Wraps](https://github.com/teslamotors/custom-wraps) repository. We thank Tesla for providing the official templates and documentation for custom vehicle visualizations.
+
+---
 
 Currently, two official plugins are available:
 

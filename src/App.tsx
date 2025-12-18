@@ -252,6 +252,11 @@ function App() {
         <header>
           <h1>Design Workshop</h1>
           <p>Tesla Custom Wraps</p>
+          <div className="credit-badge">
+            <a href="https://github.com/teslamotors/custom-wraps" target="_blank" rel="noopener noreferrer">
+              Official Template ↗
+            </a>
+          </div>
         </header>
 
         {/* Step 1: Model Selection */}
