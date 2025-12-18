@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite 
 
 ## Credits
 This project is based on the [Tesla Custom Wraps](https://github.com/teslamotors/custom-wraps) repository. We thank Tesla for providing the official templates and documentation for custom vehicle visualizations.
