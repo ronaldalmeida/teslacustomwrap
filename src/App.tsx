@@ -405,13 +405,14 @@ function App() {
           ))}
         </div >
 
-        <div className="floating-cta">
-          <button className="download-pill" disabled={!uploadedImage} onClick={downloadWrap}>
-            Download Design
-          </button>
-        </div>
       </main>
-    </div >
+
+      <div className="floating-cta">
+        <button className="download-pill" disabled={!uploadedImage} onClick={downloadWrap}>
+          Download Design
+        </button>
+      </div>
+    </div>
   );
 }
 
