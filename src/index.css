@@ -643,11 +643,13 @@ h1.hero {
   }
 
   .download-pill {
-    width: 90%;
+    width: auto;
+    min-width: 85%;
+    max-width: 95%;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 14px;
     opacity: 1 !important;
-    /* Ensure visibility on mobile */
     visibility: visible !important;
   }
 
