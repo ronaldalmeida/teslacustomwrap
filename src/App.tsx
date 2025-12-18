@@ -270,8 +270,8 @@ function App() {
     <div className="app-container" onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp}>
       <div className={`sidebar ${isImmersive ? 'immersive' : ''}`}>
         <header>
-          <h1>Design Workshop</h1>
-          <p>Tesla Custom Wraps</p>
+          <h1>Tesla Custom Wrap Designer</h1>
+          <p>Workshop for Cybertruck, Model 3, and Model Y</p>
           <div className="credit-badge">
             <a href="https://github.com/teslamotors/custom-wraps" target="_blank" rel="noopener noreferrer">
               Official Template ↗
@@ -282,7 +282,7 @@ function App() {
         {/* Step 1: Model Selection */}
         <div className="collapsible-section">
           <div className="label-row-collapsible" onClick={() => setIsVehicleCollapsed(!isVehicleCollapsed)}>
-            <span className="label-caps">1. Select Model</span>
+            <h2 className="label-caps">1. Select Vehicle Model</h2>
             <span className="chevron-icon">{isVehicleCollapsed ? '＋' : '－'}</span>
           </div>
           <div className={`collapsible-content ${isVehicleCollapsed ? 'collapsed' : ''}`}>
@@ -296,7 +296,7 @@ function App() {
                     setIsVehicleCollapsed(true);
                   }}
                 >
-                  <img src={`/templates/${model.id}/vehicle_image.png`} alt={model.name} />
+                  <img src={`/templates/${model.id}/vehicle_image.png`} alt={`Tesla ${model.name} template`} />
                   <div className="v-name">{model.name}</div>
                 </div>
               ))}
@@ -312,14 +312,14 @@ function App() {
         {/* Step 2: Upload Pattern */}
         <div ref={uploadSectionRef} style={{ opacity: selectedVehicle ? 1 : 0.3, pointerEvents: selectedVehicle ? 'auto' : 'none' }}>
           <div className="label-row-collapsible">
-            <span className="label-caps">2. Apply Pattern</span>
+            <h2 className="label-caps">2. Apply Custom Pattern</h2>
             {uploadedImage && <span className="status-badge">Ready</span>}
           </div>
           <div className={`upload-btn ${selectedVehicle && !uploadedImage ? 'highlight-pulse' : ''} ${uploadedImage ? 'has-image' : ''}`} onClick={() => fileInputRef.current?.click()}>
             {uploadedImage ? (
               <div className="upload-preview-container">
                 <div className="thumbnail-wrapper">
-                  <img src={uploadedImage} alt="Preview" />
+                  <img src={uploadedImage} alt="Custom pattern preview" />
                   <div className="edit-overlay">✎</div>
                 </div>
                 <span>Change Pattern</span>
@@ -333,7 +333,7 @@ function App() {
 
         {/* Step 3: Transformation */}
         <div className={`control-stack ${!uploadedImage ? 'disabled' : ''}`}>
-          <span className="label-caps">3. Adjust & Align</span>
+          <h2 className="label-caps">3. Adjust & Align Wrap</h2>
 
           <div className="control-group">
             <div className="icon-label">
