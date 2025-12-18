@@ -23,6 +23,13 @@ function App() {
   const [isImmersive, setIsImmersive] = useState(false);
   const [isVehicleCollapsed, setIsVehicleCollapsed] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const uploadSectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedVehicle && uploadSectionRef.current) {
+      uploadSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [selectedVehicle]);
 
   const [transform, setTransform] = useState<TransformState>({
     scale: 1,
@@ -303,7 +310,7 @@ function App() {
         </div>
 
         {/* Step 2: Upload Pattern */}
-        <div style={{ opacity: selectedVehicle ? 1 : 0.3, pointerEvents: selectedVehicle ? 'auto' : 'none' }}>
+        <div ref={uploadSectionRef} style={{ opacity: selectedVehicle ? 1 : 0.3, pointerEvents: selectedVehicle ? 'auto' : 'none' }}>
           <div className="label-row-collapsible">
             <span className="label-caps">2. Apply Pattern</span>
             {uploadedImage && <span className="status-badge">Ready</span>}
